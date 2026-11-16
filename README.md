@@ -34,8 +34,7 @@ This is the Windows edition of Spejari. The Linux / Raspberry Pi edition lives i
 9. [Project layout](#project-layout)
 10. [Troubleshooting](#troubleshooting)
 11. [Development](#development)
-12. [Publishing to GitHub](#publishing-to-github)
-13. [Legal and ethics](#legal-and-ethics)
+12. [Legal and ethics](#legal-and-ethics)
 
 ## Quick start
 
@@ -239,23 +238,6 @@ setup.bat -Dev
 The tests cover the ctypes structure layouts (sizes and offsets checked against the Windows SDK values), BSS-list and adapter-list parsing on synthetic memory, security detection from raw information elements, NMEA parsing, distance filtering, adapter tagging and limits, hot-plug, stale-cache filtering, the CSV format and journal recovery. The scan pipeline is exercised end to end with `--simulate` (simulated adapters that emit real information elements). GitHub Actions runs the suite on Windows and Linux.
 
 **Status:** the Windows API layer was developed against the SDK documentation and a simulated backend. Real-hardware reports and fixes are welcome: please open an issue with the output of `spejari.bat --list-adapters` and your Windows version.
-
-## Publishing to GitHub
-
-```bat
-git init -b main
-git add .
-git commit -m "Initial commit: Spejari for Windows 1.0.0"
-
-:: with the GitHub CLI
-gh repo create spejariwindows --public --source=. --remote=origin --push
-
-:: or: create an empty repo on github.com, then
-git remote add origin https://github.com/YOUR-USER/spejariwindows.git
-git push -u origin main
-```
-
-The GitHub web uploader does not unzip archives: extract the zip first and drag the **contents** of the folder into *Add file > Upload files*. The bundled `.gitignore` keeps your drive data (`exports\*.csv`, journals) out of the repository. **Never commit your wardriving logs**: they contain location data.
 
 ## Legal and ethics
 
