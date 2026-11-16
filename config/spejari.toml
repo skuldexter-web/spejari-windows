@@ -1,0 +1,36 @@
+# Spejari for Windows configuration. Every value shown is the built-in default.
+# Command-line flags override this file (see `spejari.bat --help`).
+
+[scan]
+max_adapters = 10           # hard limit is 10
+include_interfaces = []     # adapter tag, GUID or part of its name, e.g. ["ALFA"]; empty = all adapters
+exclude_interfaces = []     # e.g. ["Intel"] to keep your internal Wi-Fi out of the cluster
+band_2g = true              # record 2.4 GHz networks
+band_5g = true              # record 5 GHz networks
+scan_cycle_s = 4.0          # seconds per scan cycle of each adapter (2-30)
+stagger = true              # spread the adapters evenly over the cycle
+drop_stale = true           # ignore cached results that did not receive a new beacon
+adapter_poll_interval = 2.0 # seconds between hot-plug checks
+
+[log]
+output_dir = "exports"      # relative paths are resolved against the project folder
+min_distance_m = 25.0       # log a known network again after moving this far...
+rssi_improvement_db = 8     # ...or when its signal is this much stronger than ever logged
+feed_update_interval = 5.0  # seconds between live-feed refreshes of the same BSSID
+
+[gps]
+source = "auto"             # auto | serial | gpsd | none
+serial_port = ""            # e.g. "COM5"; empty = auto-detect (u-blox first)
+baud = 0                    # 0 = auto-detect (irrelevant for USB-CDC u-blox dongles)
+probe_other_ports = false   # also probe non-u-blox COM ports
+gpsd_host = "127.0.0.1"     # a gpsd server (e.g. on a Raspberry Pi in the car) also works
+gpsd_port = 2947
+min_fix_mode = 2            # 2 = accept 2D fixes, 3 = require a 3D fix before logging
+min_step_m = 5.0            # ignore GPS jitter smaller than this when summing distance
+max_speed_mps = 70.0        # reject position jumps implying more than ~250 km/h
+stale_after_s = 5.0         # fix is treated as lost after this many seconds of silence
+
+[ui]
+default_mode = "ask"        # ask = pick at start-up | cli | gui
+refresh_hz = 4.0
+feed_history = 500
